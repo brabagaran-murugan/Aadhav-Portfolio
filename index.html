@@ -3,57 +3,73 @@
 <head>
   <title>AADHAV</title>
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
     body {
       margin: 0;
       height: 100vh;
       display: flex;
       justify-content: center;
       align-items: center;
-      background: url('https://i.imgur.com/4Z8VQ7S.jpeg') center/cover no-repeat;
-      /* fallback gradient if image fails */
-      background-color: #0d0d0d;
-      animation: bgScroll 20s linear infinite;
-      font-family: 'Press Start 2P', sans-serif;
+      background:
+        radial-gradient(circle at 10% 20%, #1b2735 0, #090a0f 40%, #000000 100%);
+      overflow: hidden;
+      font-family: 'Press Start 2P', system-ui, sans-serif;
     }
 
-    /* Scrolling gaming background */
-    @keyframes bgScroll {
-      0% { background-position: 0 0; }
-      100% { background-position: 0 1000px; }
+    /* Moving pixel grid overlay */
+    .grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(#1f2933 1px, transparent 1px),
+        linear-gradient(90deg, #1f2933 1px, transparent 1px);
+      background-size: 40px 40px;
+      opacity: 0.25;
+      animation: gridMove 12s linear infinite;
     }
 
-    h1 {
-      font-size: 4rem;
+    @keyframes gridMove {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(40px); }
+    }
+
+    .content {
+      position: relative;
+      text-align: center;
       color: #00eaff;
-      text-shadow: 
-        0 0 10px #00eaff,
-        0 0 20px #00eaff,
-        0 0 40px #0077ff,
-        0 0 80px #0044ff;
-      animation: glow 2s ease-in-out infinite alternate,
-                 popIn 1s ease forwards;
+      text-shadow:
+        0 0 8px #00eaff,
+        0 0 16px #0077ff,
+        0 0 32px #0044ff;
+      animation: popIn 1s ease forwards;
       opacity: 0;
     }
 
-    /* Neon glow animation */
-    @keyframes glow {
-      from { text-shadow: 0 0 10px #00eaff; }
-      to { text-shadow: 0 0 25px #00eaff, 0 0 50px #0077ff; }
-    }
-
-    /* Pop-in animation */
     @keyframes popIn {
       0% { transform: scale(0.3); opacity: 0; }
       100% { transform: scale(1); opacity: 1; }
     }
 
-    /* Retro gaming font */
-    @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+    h1 {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+    }
+
+    p {
+      font-size: 0.9rem;
+      color: #c4f3ff;
+    }
   </style>
 </head>
 <body>
 
-  <h1>AADHAV</h1>
+  <div class="grid"></div>
+
+  <div class="content">
+    <h1>AADHAV</h1>
+    <p>PLAYER 1 · LEVEL 10</p>
+  </div>
 
 </body>
 </html>
