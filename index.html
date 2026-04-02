@@ -9,31 +9,46 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      background: linear-gradient(135deg, #6fd6ff, #ffdd6f, #ff8f8f);
-      background-size: 400% 400%;
-      animation: bgMove 12s ease infinite;
-      font-family: 'Comic Sans MS', 'Poppins', sans-serif;
+      background: url('https://i.imgur.com/4Z8VQ7S.jpeg') center/cover no-repeat;
+      /* fallback gradient if image fails */
+      background-color: #0d0d0d;
+      animation: bgScroll 20s linear infinite;
+      font-family: 'Press Start 2P', sans-serif;
     }
 
-    @keyframes bgMove {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
+    /* Scrolling gaming background */
+    @keyframes bgScroll {
+      0% { background-position: 0 0; }
+      100% { background-position: 0 1000px; }
     }
 
     h1 {
-      font-size: 5rem;
-      color: white;
-      text-shadow: 0 6px 20px rgba(0,0,0,0.3);
-      animation: bounceIn 1.2s ease forwards;
+      font-size: 4rem;
+      color: #00eaff;
+      text-shadow: 
+        0 0 10px #00eaff,
+        0 0 20px #00eaff,
+        0 0 40px #0077ff,
+        0 0 80px #0044ff;
+      animation: glow 2s ease-in-out infinite alternate,
+                 popIn 1s ease forwards;
       opacity: 0;
     }
 
-    @keyframes bounceIn {
-      0% { transform: scale(0.3); opacity: 0; }
-      60% { transform: scale(1.2); opacity: 1; }
-      100% { transform: scale(1); }
+    /* Neon glow animation */
+    @keyframes glow {
+      from { text-shadow: 0 0 10px #00eaff; }
+      to { text-shadow: 0 0 25px #00eaff, 0 0 50px #0077ff; }
     }
+
+    /* Pop-in animation */
+    @keyframes popIn {
+      0% { transform: scale(0.3); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    /* Retro gaming font */
+    @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
   </style>
 </head>
 <body>
