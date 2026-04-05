@@ -37,7 +37,6 @@
     .content {
       position: relative;
       text-align: center;
-      margin-top: 80px;
       color: #00eaff;
       text-shadow:
         0 0 8px #00eaff,
@@ -45,6 +44,7 @@
         0 0 32px #0044ff;
       animation: popIn 1s ease forwards;
       opacity: 0;
+      margin-top: 80px;
     }
 
     @keyframes popIn {
@@ -62,35 +62,6 @@
       color: #c4f3ff;
     }
 
-    /* Digital Clock Styles */
-    .clock-container {
-      margin-top: 2rem;
-      animation: popIn 1s ease forwards 0.3s backwards;
-    }
-
-    .digital-time {
-      text-align: center;
-      color: #00eaff;
-      font-size: 2rem;
-      font-weight: bold;
-      text-shadow: 
-        0 0 10px #00eaff,
-        0 0 20px #0077ff,
-        0 0 30px #0044ff;
-      font-family: 'Courier New', monospace;
-      letter-spacing: 0.2em;
-    }
-
-    .am-pm {
-      color: #00eaff;
-      font-size: 1.5rem;
-      text-shadow:
-        0 0 8px #00eaff,
-        0 0 16px #0077ff,
-        0 0 32px #0044ff;
-      margin-left: 1rem;
-    }
-    
     /* Running Banner */
     .banner {
       position: fixed;
@@ -124,18 +95,163 @@
       0% { transform: translateX(100%); }
       100% { transform: translateX(-100%); }
     }
+
+    /* Digital Clock Styles */
+    .clock-container {
+      margin-top: 2rem;
+      animation: popIn 1s ease forwards 0.3s backwards;
+    }
+
+    .digital-time {
+      text-align: center;
+      color: #00eaff;
+      font-size: 2.5rem;
+      font-weight: bold;
+      text-shadow: 
+        0 0 10px #00eaff,
+        0 0 20px #0077ff,
+        0 0 30px #0044ff;
+      font-family: 'Courier New', monospace;
+      letter-spacing: 0.2em;
+    }
+
+    .am-pm {
+      color: #00eaff;
+      font-size: 1.5rem;
+      text-shadow:
+        0 0 8px #00eaff,
+        0 0 16px #0077ff,
+        0 0 32px #0044ff;
+      margin-left: 1rem;
+    }
+
+    /* Poll/Games Section */
+    .poll-container {
+      position: fixed;
+      left: 20px;
+      top: 100px;
+      width: 250px;
+      background: rgba(27, 39, 53, 0.9);
+      border: 2px solid #00eaff;
+      border-radius: 10px;
+      padding: 15px;
+      box-shadow: 0 0 20px rgba(0, 234, 255, 0.3);
+      z-index: 50;
+      max-height: 500px;
+      overflow-y: auto;
+    }
+
+    .poll-title {
+      color: #00eaff;
+      font-size: 0.7rem;
+      text-align: center;
+      margin-bottom: 15px;
+      text-shadow: 0 0 8px #00eaff;
+    }
+
+    .game-option {
+      margin-bottom: 12px;
+      cursor: pointer;
+      padding: 10px;
+      background: rgba(0, 234, 255, 0.1);
+      border: 1px solid #00eaff;
+      border-radius: 5px;
+      transition: all 0.3s ease;
+    }
+
+    .game-option:hover {
+      background: rgba(0, 234, 255, 0.2);
+      box-shadow: 0 0 10px #00eaff;
+    }
+
+    .game-name {
+      color: #00eaff;
+      font-size: 0.6rem;
+      margin-bottom: 5px;
+      text-shadow: 0 0 5px #00eaff;
+    }
+
+    .vote-bar {
+      background: rgba(0, 119, 255, 0.3);
+      height: 20px;
+      border-radius: 3px;
+      overflow: hidden;
+      margin-bottom: 3px;
+    }
+
+    .vote-fill {
+      background: linear-gradient(90deg, #00eaff, #0077ff);
+      height: 100%;
+      transition: width 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.5rem;
+      color: #000;
+      font-weight: bold;
+    }
+
+    .vote-count {
+      color: #c4f3ff;
+      font-size: 0.5rem;
+      text-align: right;
+    }
+
+    /* Right side stats */
+    .stats-container {
+      position: fixed;
+      right: 20px;
+      top: 100px;
+      width: 200px;
+      background: rgba(27, 39, 53, 0.9);
+      border: 2px solid #00eaff;
+      border-radius: 10px;
+      padding: 15px;
+      box-shadow: 0 0 20px rgba(0, 234, 255, 0.3);
+      z-index: 50;
+    }
+
+    .stats-title {
+      color: #00eaff;
+      font-size: 0.7rem;
+      text-align: center;
+      margin-bottom: 10px;
+      text-shadow: 0 0 8px #00eaff;
+    }
+
+    .stat-item {
+      color: #c4f3ff;
+      font-size: 0.6rem;
+      margin-bottom: 8px;
+      padding: 5px;
+      background: rgba(0, 234, 255, 0.1);
+      border-radius: 3px;
+    }
   </style>
 </head>
 <body>
+
+  <div class="grid"></div>
+
   <div class="banner">
     <div class="banner-text">★ Welcome to AADHAV's gaming world ★</div>
   </div>
-  
-  <div class="grid"></div>
+
+  <!-- Poll Section - Left Side -->
+  <div class="poll-container">
+    <div class="poll-title">WHICH GAMES DO YOU LIKE?</div>
+    <div id="pollOptions"></div>
+  </div>
+
+  <!-- Stats Section - Right Side -->
+  <div class="stats-container">
+    <div class="stats-title">LEADERBOARD</div>
+    <div id="statsDisplay"></div>
+  </div>
 
   <div class="content">
     <h1>AADHAV</h1>
-    <p>PLAYER 1 · LEVEL 100</p>
+    <p>PLAYER 1 · LEVEL 10</p>
 
     <div class="clock-container">
       <div class="digital-time" id="digitalTime">00:00 <span class="am-pm">AM</span></div>
@@ -143,6 +259,83 @@
   </div>
 
   <script>
+    // Game list
+    const games = [
+      'Geometry Dash',
+      'Minecraft',
+      'Fortnite',
+      'Valorant',
+      'Elden Ring',
+      'Street Fighter 6'
+    ];
+
+    // Initialize votes from localStorage (persists on refresh)
+    function initializeVotes() {
+      const storedVotes = localStorage.getItem('gameVotes');
+      if (!storedVotes) {
+        const initialVotes = {};
+        games.forEach(game => initialVotes[game] = 0);
+        localStorage.setItem('gameVotes', JSON.stringify(initialVotes));
+      }
+    }
+
+    // Get votes
+    function getVotes() {
+      return JSON.parse(localStorage.getItem('gameVotes'));
+    }
+
+    // Save votes
+    function saveVotes(votes) {
+      localStorage.setItem('gameVotes', JSON.stringify(votes));
+    }
+
+    // Vote for a game
+    function voteGame(gameName) {
+      const votes = getVotes();
+      votes[gameName]++;
+      saveVotes(votes);
+      renderPoll();
+      renderStats();
+    }
+
+    // Render poll on left
+    function renderPoll() {
+      const votes = getVotes();
+      const pollContainer = document.getElementById('pollOptions');
+      const totalVotes = Object.values(votes).reduce((a, b) => a + b, 0) || 1;
+
+      pollContainer.innerHTML = games.map(game => {
+        const gameVotes = votes[game];
+        const percentage = totalVotes > 0 ? Math.round((gameVotes / totalVotes) * 100) : 0;
+        return `
+          <div class="game-option" onclick="voteGame('${game}')">
+            <div class="game-name">${game}</div>
+            <div class="vote-bar">
+              <div class="vote-fill" style="width: ${percentage}%">
+                ${percentage > 10 ? percentage + '%' : ''}
+              </div>
+            </div>
+            <div class="vote-count">${gameVotes} votes</div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    // Render stats on right (sorted by votes)
+    function renderStats() {
+      const votes = getVotes();
+      const sorted = Object.entries(votes)
+        .sort((a, b) => b[1] - a[1]);
+
+      const statsDisplay = document.getElementById('statsDisplay');
+      statsDisplay.innerHTML = sorted.map(([game, count], index) => {
+        const medals = ['🥇', '🥈', '🥉'];
+        const medal = medals[index] || '🎮';
+        return `<div class="stat-item">${medal} ${game}: ${count}</div>`;
+      }).join('');
+    }
+
+    // Clock function
     function updateClock() {
       const now = new Date();
       let hours = now.getHours();
@@ -156,6 +349,10 @@
       document.getElementById('digitalTime').innerHTML = `${hoursStr}:${minutes} <span class="am-pm">${ampm}</span>`;
     }
 
+    // Initialize all
+    initializeVotes();
+    renderPoll();
+    renderStats();
     updateClock();
     setInterval(updateClock, 1000);
   </script>
