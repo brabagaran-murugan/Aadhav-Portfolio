@@ -61,99 +61,30 @@
       color: #c4f3ff;
     }
 
-    /* Animated Clock Styles */
+    /* Digital Clock Styles */
     .clock-container {
       margin-top: 2rem;
       animation: popIn 1s ease forwards 0.3s backwards;
     }
 
-    .clock {
-      width: 200px;
-      height: 200px;
-      border: 3px solid #00eaff;
-      border-radius: 50%;
-      position: relative;
-      margin: 0 auto;
-      background: radial-gradient(circle at 30% 30%, #1b3a4a 0%, #0a1520 100%);
-      box-shadow:
-        0 0 20px #00eaff,
-        0 0 40px #0077ff,
-        inset 0 0 20px rgba(0, 234, 255, 0.1);
-      animation: clockGlow 2s ease-in-out infinite;
-    }
-
-    @keyframes clockGlow {
-      0%, 100% { box-shadow: 0 0 20px #00eaff, 0 0 40px #0077ff, inset 0 0 20px rgba(0, 234, 255, 0.1); }
-      50% { box-shadow: 0 0 30px #00eaff, 0 0 60px #0077ff, inset 0 0 30px rgba(0, 234, 255, 0.2); }
-    }
-
-    .center-dot {
-      width: 12px;
-      height: 12px;
-      background: #00eaff;
-      border-radius: 50%;
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      z-index: 10;
-      box-shadow: 0 0 10px #00eaff;
-    }
-
-    .hand {
-      position: absolute;
-      bottom: 50%;
-      left: 50%;
-      transform-origin: bottom center;
-      background: #00eaff;
-      box-shadow: 0 0 8px #00eaff, 0 0 16px #0077ff;
-    }
-
-    .hour-hand {
-      width: 4px;
-      height: 50px;
-      margin-left: -2px;
-      animation: rotateHour 43200s linear infinite;
-    }
-
-    .minute-hand {
-      width: 3px;
-      height: 70px;
-      margin-left: -1.5px;
-      animation: rotateMinute 3600s linear infinite;
-    }
-
-    .second-hand {
-      width: 2px;
-      height: 80px;
-      margin-left: -1px;
-      background: #ff00ff;
-      box-shadow: 0 0 8px #ff00ff, 0 0 16px #ff0088;
-      animation: rotateSecond 60s linear infinite;
-    }
-
-    @keyframes rotateHour {
-      from { transform: rotate(0deg); }
-      to { transform: rotate(360deg); }
-    }
-
-    @keyframes rotateMinute {
-      from { transform: rotate(0deg); }
-      to { transform: rotate(360deg); }
-    }
-
-    @keyframes rotateSecond {
-      from { transform: rotate(0deg); }
-      to { transform: rotate(360deg); }
-    }
-
     .digital-time {
       text-align: center;
       color: #00eaff;
-      font-size: 1.2rem;
-      margin-top: 1rem;
-      text-shadow: 0 0 8px #00eaff;
+      font-size: 2.5rem;
+      font-weight: bold;
+      text-shadow: 
+        0 0 10px #00eaff,
+        0 0 20px #0077ff,
+        0 0 30px #0044ff;
       font-family: 'Courier New', monospace;
+      letter-spacing: 0.2em;
+    }
+
+    .am-pm {
+      color: #ff00ff;
+      font-size: 1.5rem;
+      text-shadow: 0 0 10px #ff00ff, 0 0 15px #ff0088;
+      margin-left: 1rem;
     }
   </style>
 </head>
@@ -166,23 +97,22 @@
     <p>PLAYER 1 · LEVEL 10</p>
 
     <div class="clock-container">
-      <div class="clock">
-        <div class="hand hour-hand"></div>
-        <div class="hand minute-hand"></div>
-        <div class="hand second-hand"></div>
-        <div class="center-dot"></div>
-      </div>
-      <div class="digital-time" id="digitalTime">00:00:00</div>
+      <div class="digital-time" id="digitalTime">00:00 <span class="am-pm">AM</span></div>
     </div>
   </div>
 
   <script>
     function updateClock() {
       const now = new Date();
-      const hours = String(now.getHours()).padStart(2, '0');
+      let hours = now.getHours();
       const minutes = String(now.getMinutes()).padStart(2, '0');
-      const seconds = String(now.getSeconds()).padStart(2, '0');
-      document.getElementById('digitalTime').textContent = `${hours}:${minutes}:${seconds}`;
+      
+      const ampm = hours >= 12 ? 'PM' : 'AM';
+      hours = hours % 12;
+      hours = hours ? hours : 12;
+      const hoursStr = String(hours).padStart(2, '0');
+      
+      document.getElementById('digitalTime').innerHTML = `${hoursStr}:${minutes} <span class="am-pm">${ampm}</span>`;
     }
 
     updateClock();
